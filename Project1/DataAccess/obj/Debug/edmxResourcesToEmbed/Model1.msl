@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="project0ModelStoreContainer" CdmEntityContainer="project0Entities">
+    <EntitySetMapping Name="reviews">
+      <EntityTypeMapping TypeName="project0Model.review">
+        <MappingFragment StoreEntitySet="review">
+          <ScalarProperty Name="review_id" ColumnName="review_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="score" ColumnName="score" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="restuarants">
+      <EntityTypeMapping TypeName="project0Model.restuarant">
+        <MappingFragment StoreEntitySet="restuarant">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="rating" ColumnName="rating" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

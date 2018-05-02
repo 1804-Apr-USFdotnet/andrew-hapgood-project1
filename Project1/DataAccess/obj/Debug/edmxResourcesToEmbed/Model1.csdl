@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="project0Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="review">
+    <Key>
+      <PropertyRef Name="review_id" />
+    </Key>
+    <Property Name="review_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="score" Type="Int32" Nullable="false" />
+    <Property Name="message" Type="String" MaxLength="240" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="restuarant" Relationship="Self.FK__review__id__60A75C0F" FromRole="review" ToRole="restuarant" />
+  </EntityType>
+  <EntityType Name="restuarant">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="rating" Type="Double" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="reviews" Relationship="Self.FK__review__id__60A75C0F" FromRole="restuarant" ToRole="review" />
+  </EntityType>
+  <Association Name="FK__review__id__60A75C0F">
+    <End Role="restuarant" Type="Self.restuarant" Multiplicity="1" />
+    <End Role="review" Type="Self.review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="restuarant">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="review">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="project0Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="reviews" EntityType="Self.review" />
+    <EntitySet Name="restuarants" EntityType="Self.restuarant" />
+    <AssociationSet Name="FK__review__id__60A75C0F" Association="Self.FK__review__id__60A75C0F">
+      <End Role="restuarant" EntitySet="restuarants" />
+      <End Role="review" EntitySet="reviews" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
