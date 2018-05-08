@@ -39,7 +39,7 @@ namespace project_1.Controllers
 					temp = temp.OrderByDescending(x => x.name);
 					break;
 				case "n":
-					temp = temp.OrderBy(x => x.rating);
+					temp = temp.OrderByDescending(x => x.rating);
 					break;
 				default:
 					// something bad happened

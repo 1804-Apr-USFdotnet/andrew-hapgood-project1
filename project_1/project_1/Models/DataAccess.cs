@@ -10,7 +10,7 @@ namespace project_1.Models
 {
 	public class DataAccess
 	{
-		project1Entities db = new project1Entities();
+		private project1Entities db = new project1Entities();
 
 		public void AddRestuarant(string _name, string _address)
 		{
@@ -84,7 +84,7 @@ namespace project_1.Models
 
 		public void UpdateDB()
 		{
-			db.Configuration.ProxyCreationEnabled = false;
+			//db.Configuration.ProxyCreationEnabled = false;
 
 			/*var rest = GetRestuarants();
 			var rev = GetReviews();
@@ -119,7 +119,7 @@ namespace project_1.Models
 				foreach (var j in review_temp)
 				{
 					// get all relevant reviews
-					if (j.id == i.id)
+					if (j.rest_id == i.id)
 					{
 						k.Add(j.score);
 					}
