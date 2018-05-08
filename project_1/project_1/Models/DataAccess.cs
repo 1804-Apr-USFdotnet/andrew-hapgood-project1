@@ -122,16 +122,21 @@ namespace project_1.Models
 						sum += j.score;
 						count++;
 					}
-					try
-					{
-						i.rating = sum / count;
-						db.SaveChanges();
-					}
-					catch
-					{
-
-					}
 				}
+				try
+				{
+					i.rating = sum / count;
+					db.SaveChanges();
+				}
+				catch
+				{
+					//div by zero
+					i.rating = null;
+					db.SaveChanges();
+
+				}
+				sum = 0;
+				count = 0;
 			}
 		}
 		public IEnumerable<review> GetReviews()
