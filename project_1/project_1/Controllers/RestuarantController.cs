@@ -15,7 +15,6 @@ namespace project_1.Controllers
 			ViewBag.message = "Restuarant Page";
 
 			var crud = new DataAccess();
-			//crud.UpdateDB();
 			var temp = crud.GetRestuarants();
 
 			return View(temp);
@@ -24,9 +23,11 @@ namespace project_1.Controllers
 		[HttpGet]
 		public ActionResult Index(string sort)
 		{
+			//var new_crud = new DataAccess();
+			//new_crud.UpdateDB();
+
 			var crud = new DataAccess();
 			ViewBag.message = "sorting";
-			//crud.UpdateDB();
 			var temp = crud.GetRestuarants();
 
 			switch (sort)

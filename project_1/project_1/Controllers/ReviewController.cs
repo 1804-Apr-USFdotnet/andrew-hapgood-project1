@@ -58,8 +58,9 @@ namespace project_1.Controllers
 		public ActionResult Read(int id)
 		{
 			var crud = new DataAccess();
-			var temp = crud.GetReviews(id);
-			return View(temp);
+			var t = crud.GetReviews(id);
+			//var temp = crud.GetReviews(id);
+			return View();
 		}
 	}
 }

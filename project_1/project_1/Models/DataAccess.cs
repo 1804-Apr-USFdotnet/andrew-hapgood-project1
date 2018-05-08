@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.Entity;
 using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace project_1.Models
@@ -64,14 +65,15 @@ namespace project_1.Models
 		{
 			try
 			{
-				db.reviews.Add(new review
+				var t = new review
 				{
 					name = _name,
 					score = _score,
 					message = _message,
 					rest_id = _rest_id
-					
-				});
+
+				};
+				db.reviews.Add(t);
 				db.SaveChanges();
 			}
 			catch
@@ -80,35 +82,43 @@ namespace project_1.Models
 			}
 		}
 
-		public IEnumerable<review> GetReviews(int id)
-		{
-			// search to see if restuarant exist
-			var result = new List<review>();
-			foreach (var temp in db.reviews.ToList())
-			{
-				if (temp.rest_id == id)
-				{
-					result.Add(temp);
-				}
-			}
-			return result;
-		}
-
 		public void UpdateDB()
 		{
-			// not working, fix quickly
-			var rest = db.restuarants.ToList();
-			var rev = db.reviews.ToList();
+			db.Configuration.ProxyCreationEnabled = false;
 
-			foreach(var rest_item in rest)
+			var rest = GetRestuarants();
+			var rev = GetReviews();
+			float sum = 0;
+			float count = 0;
+			foreach (var rest_item in rest)
 			{
-				foreach(var review_item in rev)
+				foreach(var rev_item in rev)
+				{
+					sum += rev_item.score;
+					count++;
+				}
+				try
+				{
+					rest_item.rating = sum / count;
+					db.SaveChanges();
+				}
+				catch
 				{
 
 				}
+				sum = 0;
+				count = 0;
 			}
-			
 		}
+		public IEnumerable<review> GetReviews()
+		{
+			return db.reviews.ToList();
+		}
+		public IEnumerable<review> GetReviews(int _id)
+		{
+			return db.reviews.Where(x => x.rest_id == _id);
+		}
+
 
 	}
 }

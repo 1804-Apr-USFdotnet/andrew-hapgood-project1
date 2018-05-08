@@ -20,14 +20,9 @@ namespace project_1.Models
 	public partial class review
 	{
 		public int id { get; set; }
-		[Required]
 		public string name { get; set; }
-		[Required]
 		public int score { get; set; }
-		[Required]
-		[StringLength(240)]
 		public string message { get; set; }
-		[Required]
 		public int rest_id { get; set; }
 	
 		public virtual restuarant restuarant { get; set; }
