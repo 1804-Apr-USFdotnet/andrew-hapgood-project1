@@ -1,4 +1,4 @@
-﻿@model List<project_1.Models.review>
+﻿@model IEnumerable<project_1.Models.review>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -18,7 +18,7 @@
     <tbody>
         @{int i = 1; }
 
-        @foreach (var item in Model)
+        @foreach (var item in Model.ToList())
         {
             <tr>
                 <td>@i</td>

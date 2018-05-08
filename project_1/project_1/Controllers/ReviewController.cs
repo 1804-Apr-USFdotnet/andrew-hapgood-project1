@@ -37,6 +37,7 @@ namespace project_1.Controllers
 			return View();
 		}
 
+		[HttpPost]
 		public ActionResult Delete(int id)
 		{
 			var crud = new DataAccess();
@@ -49,9 +50,20 @@ namespace project_1.Controllers
 			return View();
 		}
 
+
+		[HttpPost]
+		public ActionResult Edit(review rev)
+		{
+			var crud = new DataAccess();
+			crud.UpdateReview(rev);
+			return RedirectToAction("Index","Review");
+		}
+
 		public ActionResult Read()
 		{
-			return View();
+			var crud = new DataAccess();
+			var t = crud.GetReviews();
+			return View(t);
 		}
 
 		[HttpPost]
@@ -60,7 +72,15 @@ namespace project_1.Controllers
 			var crud = new DataAccess();
 			var t = crud.GetReviews(id);
 			//var temp = crud.GetReviews(id);
-			return View();
+			return View(t);
+		}
+
+		[HttpPost]
+		public ActionResult Update (review rev)
+		{
+			var crud = new DataAccess();
+			// crud.Update(rev);
+			return RedirectToAction("Index","Review");
 		}
 	}
 }

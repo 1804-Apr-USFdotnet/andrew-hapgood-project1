@@ -82,7 +82,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="project1Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="project1Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="restuarants" EntityType="Self.restuarant" />
           <EntitySet Name="reviews" EntityType="Self.review" />
           <AssociationSet Name="FK__review__rest_id__4BAC3F29" Association="Self.FK__review__rest_id__4BAC3F29">
@@ -95,7 +95,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="project1ModelStoreContainer" CdmEntityContainer="project1Entities">
+        <EntityContainerMapping StorageEntityContainer="project1ModelStoreContainer" CdmEntityContainer="project1Entities1">
           <EntitySetMapping Name="restuarants">
             <EntityTypeMapping TypeName="project1Model.restuarant">
               <MappingFragment StoreEntitySet="restuarant">

@@ -10,7 +10,7 @@ namespace project_1.Models
 {
 	public class DataAccess
 	{
-		private project1Entities db = new project1Entities();
+		private project1Entities1 db = new project1Entities1();
 
 		public void AddRestuarant(string _name, string _address)
 		{
@@ -65,15 +65,13 @@ namespace project_1.Models
 		{
 			try
 			{
-				var t = new review
+				db.reviews.Add(new review
 				{
 					name = _name,
 					score = _score,
 					message = _message,
 					rest_id = _rest_id
-
-				};
-				db.reviews.Add(t);
+				});
 				db.SaveChanges();
 			}
 			catch
@@ -82,66 +80,58 @@ namespace project_1.Models
 			}
 		}
 
+		public void UpdateReview(review rev)
+		{
+			try
+			{
+				var entity = db.reviews.Where(x => x.id == rev.id).First();
+				entity.name = rev.name;
+				entity.message = rev.message;
+				entity.rest_id = rev.rest_id;
+				db.reviews.Attach(entity);
+				db.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+				db.SaveChanges();
+
+			}
+			catch
+			{
+				// couldn't update, look into it
+			}
+		}
+
+		public void DeleteReview(int id)
+		{
+			var entity = db.reviews.SingleOrDefault(x => x.id == id);
+			db.reviews.Attach(entity);
+			db.reviews.Remove(entity);
+			db.SaveChanges();
+		}
+
 		public void UpdateDB()
 		{
-			//db.Configuration.ProxyCreationEnabled = false;
-
-			/*var rest = GetRestuarants();
-			var rev = GetReviews();
-			float sum = 0;
-			float count = 0;
-			foreach (var rest_item in rest)
-			{
-				foreach(var rev_item in rev)
-				{
-					sum += rev_item.score;
-					count++;
-				}
-				try
-				{
-					rest_item.rating = sum / count;
-					db.SaveChanges();
-				}
-				catch
-				{
-					// div by zero
-				}
-				sum = 0;
-				count = 0;
-			}*/
 			var rest_temp = db.restuarants.ToList();
 			var review_temp = db.reviews.ToList();
-			List<int> k = new List<int>();
-			double new_rating = 0;
+			int sum = 0;
+			int count = 0;
 			foreach (var i in rest_temp)
 			{
-				// get all reviews referencing temp.id
-				foreach (var j in review_temp)
+				foreach(var j in review_temp)
 				{
-					// get all relevant reviews
 					if (j.rest_id == i.id)
 					{
-						k.Add(j.score);
+						sum += j.score;
+						count++;
+					}
+					try
+					{
+						i.rating = sum / count;
+						db.SaveChanges();
+					}
+					catch
+					{
+
 					}
 				}
-				// calculate new rating
-				foreach (float l in k)
-				{
-					new_rating += l;
-				}
-				if (k.Count == 0)
-				{
-					i.rating = null;
-				}
-				else
-				{
-					new_rating = k.Sum() / k.Count;
-					i.rating = (float)new_rating;
-				}
-				// update db
-				db.SaveChanges();
-				new_rating = 0;
-				k.Clear();
 			}
 		}
 		public IEnumerable<review> GetReviews()

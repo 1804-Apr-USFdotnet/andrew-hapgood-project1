@@ -23,8 +23,8 @@ namespace project_1.Controllers
 		[HttpGet]
 		public ActionResult Index(string sort)
 		{
-			//var new_crud = new DataAccess();
-			//new_crud.UpdateDB();
+			var new_crud = new DataAccess();
+			new_crud.UpdateDB();
 
 			var crud = new DataAccess();
 			ViewBag.message = "sorting";

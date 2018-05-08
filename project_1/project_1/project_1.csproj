@@ -172,10 +172,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>entity_model.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Restuarant.cs">
+    <Compile Include="Models\restuarant.cs">
       <DependentUpon>entity_model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Review.cs">
+    <Compile Include="Models\review.cs">
       <DependentUpon>entity_model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,22 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
 namespace project_1.Models
 {
-	
-	public partial class restuarant
-	{
-		public int id { get; set; }
-		public string name { get; set; }
-		public Nullable<double> rating { get; set; }
-		public string address { get; set; }
-
-		public IEnumerable<review> review { get; set; }
-	}
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class restuarant
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public Nullable<double> rating { get; set; }
+        public string address { get; set; }
+    
+        public virtual review review { get; set; }
+    }
 }

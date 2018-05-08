@@ -7,24 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
 namespace project_1.Models
 {
-	
-	public partial class review
-	{
-		public int id { get; set; }
-		public string name { get; set; }
-		public int score { get; set; }
-		public string message { get; set; }
-		public int rest_id { get; set; }
-	
-		public virtual restuarant restuarant { get; set; }
-	}
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class review
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public int score { get; set; }
+        public string message { get; set; }
+        public int rest_id { get; set; }
+    
+        public virtual restuarant restuarant { get; set; }
+    }
 }
