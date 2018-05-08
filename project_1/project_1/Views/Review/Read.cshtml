@@ -1,0 +1,33 @@
+﻿@model List<project_1.Models.review>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Read Review</h2>
+
+
+
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th> Reviewer Name</th>
+            <th> Score </th>
+            <th> Message </th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i = 1; }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@i</td>
+                <td>@item.name</td>
+                <td>@item.score</td>
+                <td>@item.message</td>
+                @{ i++;}
+            </tr>
+        }
+    </tbody>
+</table>
+
