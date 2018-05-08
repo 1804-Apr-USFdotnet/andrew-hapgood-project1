@@ -86,7 +86,7 @@ namespace project_1.Models
 		{
 			db.Configuration.ProxyCreationEnabled = false;
 
-			var rest = GetRestuarants();
+			/*var rest = GetRestuarants();
 			var rev = GetReviews();
 			float sum = 0;
 			float count = 0;
@@ -104,10 +104,44 @@ namespace project_1.Models
 				}
 				catch
 				{
-
+					// div by zero
 				}
 				sum = 0;
 				count = 0;
+			}*/
+			var rest_temp = db.restuarants.ToList();
+			var review_temp = db.reviews.ToList();
+			List<int> k = new List<int>();
+			double new_rating = 0;
+			foreach (var i in rest_temp)
+			{
+				// get all reviews referencing temp.id
+				foreach (var j in review_temp)
+				{
+					// get all relevant reviews
+					if (j.id == i.id)
+					{
+						k.Add(j.score);
+					}
+				}
+				// calculate new rating
+				foreach (float l in k)
+				{
+					new_rating += l;
+				}
+				if (k.Count == 0)
+				{
+					i.rating = null;
+				}
+				else
+				{
+					new_rating = k.Sum() / k.Count;
+					i.rating = (float)new_rating;
+				}
+				// update db
+				db.SaveChanges();
+				new_rating = 0;
+				k.Clear();
 			}
 		}
 		public IEnumerable<review> GetReviews()
