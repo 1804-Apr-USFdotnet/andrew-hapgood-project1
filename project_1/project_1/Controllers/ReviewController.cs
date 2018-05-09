@@ -25,6 +25,7 @@ namespace project_1.Controllers
 		[HttpPost]
 		public ActionResult Create(review rev)
 		{
+			//string _name, int _score, string _message, int _rest_id
 			var crud = new DataAccess();
 			crud.AddReview(rev.name, rev.score, rev.message, rev.rest_id);
 			// do this see if it crashes
